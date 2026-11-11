@@ -22,7 +22,7 @@ Este repositório abriga o desenvolvimento do **Projeto Agenda**, separando-o do
 - Servidor **Express** configurado com **Helmet**, proteção **CSRF** (`csurf`), sessões persistidas no MongoDB (`express-session` + `connect-mongo`) e mensagens flash (`connect-flash`)
 - Front-end empacotado com **Webpack** e **Babel** (`frontend/` → `public/assets/js/bundle.js`)
 - Templates **EJS** com partials (`head.ejs`, `nav.ejs`, `messages.ejs`, `footer.ejs`), página inicial da Agenda (`index.ejs`), tela de autenticação (`login.ejs`) e página de erro (`404.ejs`) estilizadas com **Bootstrap 4**
-- **Cadastro de Usuários (Parte 1):** rota `POST /login/register`, sanitização e validação de e-mail e senha com `validator`, persistência via Mongoose e feedback visual com mensagens flash de erro e sucesso
+- **Cadastro de Usuários:** rota `POST /login/register`, validação de e-mail e tamanho de senha com `validator`, verificação de usuário já existente no MongoDB, hash unidirecional seguro de senhas com `bcryptjs` (salt + hash) e feedback visual via mensagens flash
 
 ---
 
@@ -34,6 +34,7 @@ Este repositório abriga o desenvolvimento do **Projeto Agenda**, separando-o do
 - **[Bootstrap 4](https://getbootstrap.com/docs/4.3/)** — Estilização e layout responsivo
 - **[Webpack](https://webpack.js.org/)** & **[Babel](https://babeljs.io/)** — Empacotamento e transpilação de código front-end
 - **[Helmet](https://helmetjs.github.io/)** & **csurf** — Segurança de cabeçalhos HTTP e proteção contra CSRF
+- **[bcryptjs](https://github.com/dcodeIO/bcrypt.js)** — Geração de salt e hash unidirecional seguro de senhas
 - **[validator](https://github.com/validatorjs/validator.js)** — Validação e sanitização de dados (e-mails e campos de entrada)
 - **[express-session](https://github.com/expressjs/session)**, **[connect-mongo](https://github.com/jdesboeufs/connect-mongo)** & **[connect-flash](https://github.com/jaredhanson/connect-flash)** — Gerenciamento de sessões e mensagens temporárias
 - **[dotenv](https://github.com/motdotla/dotenv)** — Gerenciamento de variáveis de ambiente
