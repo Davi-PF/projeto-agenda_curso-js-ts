@@ -1,4 +1,6 @@
 import validator from "validator";
+import { clearFieldError, clearFormErrors, setFieldError } from "./formFeedback";
+
 export default class Login {
   constructor(formClass) {
     this.form = document.querySelector(formClass);
@@ -12,8 +14,10 @@ export default class Login {
     if (!this.form) return;
     this.form.addEventListener("submit", (e) => {
       e.preventDefault();
-      alert("Form não enviado.");
       this.validate(e);
+    });
+    this.form.addEventListener("input", (e) => {
+      clearFieldError(e.target);
     });
   }
 
@@ -21,14 +25,26 @@ export default class Login {
     const el = e.target;
     const emailInput = el.querySelector('input[name="email"]');
     const passwordInput = el.querySelector('input[name="password"]');
+    const isCadastro = el.classList.contains("form-cadastro");
     let error = false;
 
-    if (!validator.isEmail(emailInput.value)) {
-      alert("E-mail inválido.");
+    clearFormErrors(el);
+
+    if (!validator.isEmail(emailInput.value.trim())) {
+      setFieldError(emailInput, "E-mail inválido.");
       error = true;
     }
-    if (passwordInput.value.length < 3 || passwordInput.value.length > 50) {
-      alert("Sua senha precisa ter entre 3 e 50 caracteres.");
+
+    if (isCadastro) {
+      if (passwordInput.value.length < 3 || passwordInput.value.length > 50) {
+        setFieldError(
+          passwordInput,
+          "Sua senha precisa ter entre 3 e 50 caracteres.",
+        );
+        error = true;
+      }
+    } else if (!passwordInput.value) {
+      setFieldError(passwordInput, "Por favor, informe sua senha.");
       error = true;
     }
 
