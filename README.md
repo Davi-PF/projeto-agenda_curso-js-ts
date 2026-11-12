@@ -21,9 +21,9 @@ Este repositório abriga o desenvolvimento do **Projeto Agenda**, separando-o do
 - Estrutura base em **MVC** (`src/models`, `src/views`, `src/controllers`, `src/middlewares`)
 - Servidor **Express** configurado com **Helmet**, proteção **CSRF** (`csurf`), sessões persistidas no MongoDB (`express-session` + `connect-mongo`) e mensagens flash (`connect-flash`)
 - Front-end empacotado com **Webpack** e **Babel** (`frontend/` → `public/assets/js/bundle.js`)
-- Templates **EJS** com partials (`head.ejs`, `nav.ejs`, `messages.ejs`, `footer.ejs`), página inicial da Agenda (`index.ejs`), telas de autenticação (`login.ejs`, `login-logado.ejs`) e página de erro (`404.ejs`) estilizadas com **Bootstrap 4**
-- **Autenticação e Sessões:** rotas `POST /login/register`, `POST /login/login` e `GET /login/logout`, validação de dados com `validator`, comparação de hash com `bcryptjs.compareSync`, persistência de sessão com `req.session.user`, tela de usuário autenticado (`login-logado.ejs`) e navegação dinâmica (exibindo "Entrar" ou "Sair" conforme o status da sessão)
-- **Agenda de Contatos (Próxima etapa):** link de atalho na navbar (`/contato/index`) e suporte a mensagens flash na página inicial (`index.ejs`) preparados para a criação do CRUD de contatos
+- Templates **EJS** com partials (`head.ejs`, `nav.ejs`, `messages.ejs`, `footer.ejs`), página inicial da Agenda (`index.ejs`), telas de autenticação (`login.ejs`, `login-logado.ejs`), formulário de contatos (`contato.ejs`) e página de erro (`404.ejs`) estilizadas com **Bootstrap 4**
+- **Autenticação e Sessões:** rotas `POST /login/register`, `POST /login/login` e `GET /login/logout`, middleware `loginRequired` para proteção de rotas autenticadas, validação de dados com `validator`, comparação de hash com `bcryptjs.compareSync`, persistência de sessão com `req.session.user` e navegação dinâmica
+- **Agenda de Contatos:** rotas protegidas por `loginRequired` (`GET /contato/index`, `POST /contato/register`, `GET /contato/index/:id`), validações no model (nome obrigatório, formato de e-mail e envio obrigatório de e-mail ou telefone), busca de contato por ID (`buscaPorId`) e formulário compartilhado de criação/visualização (`contato.ejs`). Próximo passo: edição dos contatos
 
 ---
 
@@ -53,10 +53,10 @@ Este repositório abriga o desenvolvimento do **Projeto Agenda**, separando-o do
 ├── public/                    # Arquivos estáticos e bundle gerado pelo Webpack
 │   └── assets/js/bundle.js
 ├── src/
-│   ├── controllers/           # Controladores das rotas (homeController, loginController)
-│   ├── middlewares/           # Middlewares globais (mensagens flash) e verificação de token CSRF
-│   ├── models/                # Modelos do Mongoose (HomeModel, LoginModel)
-│   └── views/                 # Views EJS e partials (includes/head, nav, messages, footer)
+│   ├── controllers/           # Controladores das rotas (homeController, loginController, contatoController)
+│   ├── middlewares/           # Middlewares globais (mensagens flash, user, loginRequired) e CSRF
+│   ├── models/                # Modelos do Mongoose (HomeModel, LoginModel, ContatoModel)
+│   └── views/                 # Views EJS e partials (includes/head, nav, messages, footer, contato)
 ├── routes.js                  # Definição das rotas da aplicação
 ├── server.js                  # Configuração e inicialização do servidor Express
 ├── webpack.config.js          # Configuração do Webpack e Babel
