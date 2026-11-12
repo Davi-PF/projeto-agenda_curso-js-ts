@@ -17,13 +17,16 @@ Aplicação web de **Agenda de Contatos** desenvolvida com **Node.js**, **Expres
 
 Este repositório abriga o desenvolvimento do **Projeto Agenda**, separando-o do [repositório principal de aulas e exercícios do curso](https://github.com/Davi-PF/curso-js-ts-aulas) para manter uma organização limpa dos projetos práticos no GitHub.
 
-### 📌 Estado Atual (Em Desenvolvimento)
-- Estrutura base em **MVC** (`src/models`, `src/views`, `src/controllers`, `src/middlewares`)
+### ✅ Funcionalidades Implementadas (Projeto Concluído)
+- Estrutura completa em **MVC** (`src/models`, `src/views`, `src/controllers`, `src/middlewares`)
 - Servidor **Express** configurado com **Helmet**, proteção **CSRF** (`csurf`), sessões persistidas no MongoDB (`express-session` + `connect-mongo`) e mensagens flash (`connect-flash`)
 - Front-end empacotado com **Webpack** e **Babel** (`frontend/` → `public/assets/js/bundle.js`)
+- **Validação no Front-end:** validação client-side nos formulários de cadastro e login (`frontend/modules/Login.js`) com `validator`
 - Templates **EJS** com partials (`head.ejs`, `nav.ejs`, `messages.ejs`, `footer.ejs`), página inicial da Agenda (`index.ejs`), telas de autenticação (`login.ejs`, `login-logado.ejs`), formulário de contatos (`contato.ejs`) e página de erro (`404.ejs`) estilizadas com **Bootstrap 4**
 - **Autenticação e Sessões:** rotas `POST /login/register`, `POST /login/login` e `GET /login/logout`, middleware `loginRequired` para proteção de rotas autenticadas, validação de dados com `validator`, comparação de hash com `bcryptjs.compareSync`, persistência de sessão com `req.session.user` e navegação dinâmica
 - **Agenda de Contatos (CRUD Completo):** rotas protegidas por `loginRequired` (`GET /contato/index`, `POST /contato/register`, `GET /contato/index/:id`, `POST /contato/edit/:id`, `GET /contato/delete/:id`), validações no model, listagem dinâmica na página inicial (`index.ejs` via `buscaContatos`), edição com `findByIdAndUpdate` e exclusão de registros
+
+> 🎉 **Status:** A etapa guiada pelo curso foi concluída! Novas validações e melhorias adicionais serão desenvolvidas em branches separadas.
 
 ---
 
@@ -45,10 +48,12 @@ Este repositório abriga o desenvolvimento do **Projeto Agenda**, separando-o do
 ## 📂 Estrutura de Pastas
 
 ```text
-├── frontend/                  # Código fonte front-end (JS e CSS)
+├── frontend/                  # Código fonte front-end (JS e módulos de validação)
 │   ├── assets/
 │   │   ├── css/style.css
 │   │   └── js/main.js
+│   ├── modules/
+│   │   └── Login.js           # Validação client-side dos formulários de login/cadastro
 │   └── main.js
 ├── public/                    # Arquivos estáticos e bundle gerado pelo Webpack
 │   └── assets/js/bundle.js
