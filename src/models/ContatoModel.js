@@ -56,7 +56,7 @@ Contato.prototype.edit = async function (id) {
   this.valida();
   if (this.errors.length > 0) return;
   this.contato = await ContatoModel.findByIdAndUpdate(id, this.body, {
-    returnDocument: 'after',
+    returnDocument: "after",
   });
 };
 
@@ -73,8 +73,8 @@ Contato.buscaContatos = async function () {
 };
 
 Contato.delete = async function (id) {
-  if(typeof id !== 'string') return;
-  const contato = await ContatoModel.findOneAndDelete(id);
+  if (typeof id !== "string") return;
+  const contato = await ContatoModel.findOneAndDelete({ _id: id });
   return contato;
 };
 
