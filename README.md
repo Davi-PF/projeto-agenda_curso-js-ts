@@ -23,7 +23,7 @@ Este repositório abriga o desenvolvimento do **Projeto Agenda**, separando-o do
 - Front-end empacotado com **Webpack** e **Babel** (`frontend/` → `public/assets/js/bundle.js`)
 - Templates **EJS** com partials (`head.ejs`, `nav.ejs`, `messages.ejs`, `footer.ejs`), página inicial da Agenda (`index.ejs`), telas de autenticação (`login.ejs`, `login-logado.ejs`), formulário de contatos (`contato.ejs`) e página de erro (`404.ejs`) estilizadas com **Bootstrap 4**
 - **Autenticação e Sessões:** rotas `POST /login/register`, `POST /login/login` e `GET /login/logout`, middleware `loginRequired` para proteção de rotas autenticadas, validação de dados com `validator`, comparação de hash com `bcryptjs.compareSync`, persistência de sessão com `req.session.user` e navegação dinâmica
-- **Agenda de Contatos:** rotas protegidas por `loginRequired` (`GET /contato/index`, `POST /contato/register`, `GET /contato/index/:id`), validações no model (nome obrigatório, formato de e-mail e envio obrigatório de e-mail ou telefone), busca de contato por ID (`buscaPorId`) e formulário compartilhado de criação/visualização (`contato.ejs`). Próximo passo: edição dos contatos
+- **Agenda de Contatos:** rotas protegidas por `loginRequired` (`GET /contato/index`, `POST /contato/register`, `GET /contato/index/:id`, `POST /contato/edit/:id`), validações no model (nome obrigatório, formato de e-mail e envio obrigatório de e-mail ou telefone), busca por ID (`buscaPorId`), edição com `findByIdAndUpdate` e formulário condicional de criação/edição (`contato.ejs`). Próximo passo: listagem e exclusão de contatos na interface principal
 
 ---
 
