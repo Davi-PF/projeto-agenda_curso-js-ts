@@ -21,8 +21,9 @@ Este repositório abriga o desenvolvimento do **Projeto Agenda**, separando-o do
 - Estrutura base em **MVC** (`src/models`, `src/views`, `src/controllers`, `src/middlewares`)
 - Servidor **Express** configurado com **Helmet**, proteção **CSRF** (`csurf`), sessões persistidas no MongoDB (`express-session` + `connect-mongo`) e mensagens flash (`connect-flash`)
 - Front-end empacotado com **Webpack** e **Babel** (`frontend/` → `public/assets/js/bundle.js`)
-- Templates **EJS** com partials (`head.ejs`, `nav.ejs`, `messages.ejs`, `footer.ejs`), página inicial da Agenda (`index.ejs`), tela de autenticação (`login.ejs`) e página de erro (`404.ejs`) estilizadas com **Bootstrap 4**
-- **Cadastro de Usuários:** rota `POST /login/register`, validação de e-mail e tamanho de senha com `validator`, verificação de usuário já existente no MongoDB, hash unidirecional seguro de senhas com `bcryptjs` (salt + hash) e feedback visual via mensagens flash
+- Templates **EJS** com partials (`head.ejs`, `nav.ejs`, `messages.ejs`, `footer.ejs`), página inicial da Agenda (`index.ejs`), telas de autenticação (`login.ejs`, `login-logado.ejs`) e página de erro (`404.ejs`) estilizadas com **Bootstrap 4**
+- **Autenticação e Sessões:** rotas `POST /login/register`, `POST /login/login` e `GET /login/logout`, validação de dados com `validator`, comparação de hash com `bcryptjs.compareSync`, persistência de sessão com `req.session.user`, tela de usuário autenticado (`login-logado.ejs`) e navegação dinâmica (exibindo "Entrar" ou "Sair" conforme o status da sessão)
+- **Agenda de Contatos (Próxima etapa):** link de atalho na navbar (`/contato/index`) e suporte a mensagens flash na página inicial (`index.ejs`) preparados para a criação do CRUD de contatos
 
 ---
 
